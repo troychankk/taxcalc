@@ -10,56 +10,56 @@ def user_option():
     return(input('Select: '))
 
 
-def cal_SncTax():
-    single_income = int(input("Please Enter your income: $"))
+def Single_calc():
+    sin_inc = int(input("Input your income: $"))
 
-    single_nci = Main.cal_SncIncome(single_income)
+    sin_nci = Main.Single_deduc(sin_inc)
 
-    print("\nYour MPF = $" + str(Main.cal_MPF(single_income)))
-    print("\nYour net chargeable income = $" + str(single_nci))
+    print("\nYour MPF = $" + str(Main.MPF_calc(sin_inc)))
+    print("\nYour net chargeable income = $" + str(sin_nci))
 
-    print("\nYour tax = $" + str(Main.cal_tax(single_nci)))
+    print("\nYour should pay tax of  = $" + str(Main.Tax_calc(sin_nci)))
 
     input("\nPress Enter to continue...")
 
-def cal_JncTax():
-    husband_income = int(input("Please input husband's personal input per year: $"))
-    wife_income = int(input("Please input wife's personal input per year: $"))
+def Joint_calc():
+    hus_inc = int(input("Input husband's personal input per year: $"))
+    wife_inc = int(input("Input wife's personal input per year: $"))
 
-    husband_nci = Main.cal_SncIncome(husband_income)
-    wife_nci = Main.cal_SncIncome(wife_income)
-    joint_nci = Main.cal_JncIncome(husband_income,wife_income)
+    hus_nci = Main.Single_deduc(hus_inc)
+    wife_nci = Main.Single_deduc(wife_inc)
+    joint_nci = Main.Joint_deduc(hus_inc,wife_inc)
 
-    print("\nHusband's MPF = $" + str(Main.cal_MPF(husband_income)))
-    print("Wife's MPF = $" + str(Main.cal_MPF(wife_income)))
+    print("\nHusband's MPF = $" + str(Main.MPF_calc(hus_inc)))
+    print("Wife's MPF = $" + str(Main.MPF_calc(wife_inc)))
 
-    print("\nHusband's net chargeable income = $" + str(husband_nci))
-    print("Husbandls tax = $" + str(Main.cal_tax(husband_nci)))
+    print("\nHusband's net chargeable income = $" + str(hus_nci))
+    print("Husbandls tax = $" + str(Main.Tax_calc(hus_nci)))
 
     print("\nWife's net chargeable income = $" + str(wife_nci))
-    print("Wife's tax = $" + str(Main.cal_tax(wife_nci)))
+    print("Wife's tax = $" + str(Main.Tax_calc(wife_nci)))
 
-    sTax = Main.cal_tax(husband_nci) + Main.cal_tax(wife_nci)
+    sinTax = Main.Tax_calc(hus_nci) + Main.Tax_calc(wife_nci)
 
-    print("\nSeparate taxation = $" + str(sTax))
+    print("\nPay Tax in Separate way = $" + str(sinTax))
 
-    jTax = Main.cal_tax(joint_nci)
+    joiTax = Main.Tax_calc(joint_nci)
     print("Joint net chargeable income = $" + str(joint_nci))
-    print("Joint taxation = $" + str(jTax))
+    print("Pay Tax in Joint way = $" + str(joiTax))
 
-    if sTax<=jTax:
-        print("\nRecommended method = Seperated taxation $"+str(sTax))
+    if sinTax<=joiTax:
+        print("\nRecommended method = Seperated taxation $"+str(sinTax))
     else:
-        print("\nRecommended method = Joint taxation $" + str(jTax))
+        print("\nRecommended method = Joint taxation $" + str(joiTax))
     input("\nPress Enter to continue...")
 
 option = user_option()
 
 while option != "0":
     if option == "1":
-        cal_SncTax()
+        Single_calc()
     if option == "2":
-        cal_JncTax()
+        Joint_calc()
     else:
         print("\n!!!!!Please enter a number!!!!!")
 

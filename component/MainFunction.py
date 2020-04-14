@@ -1,14 +1,14 @@
 class Main(object):
-    def cal_MPF(income):
-        if income < 7100*12:
+    def MPF_calc(inc):
+        if inc < 7100*12:
             mpf = 0
-        elif income >= 30000*12:
+        elif inc >= 30000*12:
             mpf = 1500*12
         else:
-            mpf = income*0.05
+            mpf = inc*0.05
         return mpf
 
-    def cal_tax(nt):
+    def Tax_calc(nt):
         sRate = 0.15
         sTax = nt * sRate
 
@@ -33,7 +33,7 @@ class Main(object):
             tax = pTax
         return tax
 
-    def chk_Tax(nt):
+    def Tax_chk(nt):
         sRate = 0.15
         sTax = nt * sRate
 
@@ -57,36 +57,36 @@ class Main(object):
         else:
             return 2
 
-    #net changeable income with separate taxation
-    def cal_SncIncome(income):
-        basic_allowance = 132000
-        netIncome = income - Main.cal_MPF(income)
-        check = Main.chk_Tax(income)
+    #net changeable inc with separate taxation
+    def Single_deduc(inc):
+        basic_allow = 132000
+        netinc = inc - Main.MPF_calc(inc)
+        check = Main.Tax_chk(inc)
         if check == 1:
-            nci = netIncome
+            nci = netinc
             return nci
-        elif netIncome>basic_allowance:
-            nci = netIncome - basic_allowance
+        elif netinc > basic_allow:
+            nci = netinc - basic_allow
             return nci
         else:
             return 0
 
-    #net changeable income with joint taxation
-    def cal_JncIncome(husband_income, wife_income):
-        basic_allowance = 132000*2
-        husband_netIncome = husband_income - Main.cal_MPF(husband_income)
-        wife_netIncome = wife_income - Main.cal_MPF(wife_income)
-        joint_netIncome = husband_netIncome + wife_netIncome
-        chk_husband = Main.chk_Tax(husband_netIncome)
-        chk_wife = Main.chk_Tax(wife_netIncome)
-        if chk_husband == 1:
-            nci = joint_netIncome
+    #net changeable inc with joint taxation
+    def Joint_deduc(hus_inc, wife_inc):
+        basic_allow = 132000*2
+        hus_net = hus_inc - Main.MPF_calc(hus_inc)
+        wife_net = wife_inc - Main.MPF_calc(wife_inc)
+        joint_netinc = hus_net + wife_net
+        chk_hus = Main.Tax_chk(hus_net)
+        chk_wife = Main.Tax_chk(wife_net)
+        if chk_hus == 1:
+            nci = joint_netinc
             return nci
         elif chk_wife == 1:
-            nci = joint_netIncome
+            nci = joint_netinc
             return nci
-        elif joint_netIncome > basic_allowance:
-            nci = joint_netIncome - basic_allowance
+        elif joint_netinc > basic_allow:
+            nci = joint_netinc - basic_allow
             return nci
         else:
             return 0
